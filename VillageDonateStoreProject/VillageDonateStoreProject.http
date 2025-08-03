@@ -1,0 +1,6 @@
+@VillageDonateStoreProject_HostAddress = http://localhost:5283
+
+GET {{VillageDonateStoreProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
