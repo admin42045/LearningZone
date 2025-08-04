@@ -27,3 +27,4 @@ ClientApp/dist/
 ## OS-specific
 .DS_Store
 Thumbs.db
+# LearningZone
