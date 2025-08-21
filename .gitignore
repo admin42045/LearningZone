@@ -1,0 +1,29 @@
+## Build results
+bin/
+obj/
+out/
+
+## Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## ASP.NET
+appsettings.*.json
+
+## EF Core
+Migrations/
+
+## Node.js frontend (React/Angular/etc.)
+ClientApp/node_modules/
+ClientApp/build/
+ClientApp/dist/
+
+## Logs
+*.log
+
+## OS-specific
+.DS_Store
+Thumbs.db

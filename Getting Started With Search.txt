@@ -1,0 +1,117 @@
+----------- Chapter 1 Getting Started with Select -------------
+
+--1.1 Connecting with select - You have to select a specific database which is you want to select
+use AdventureWorks2012
+
+-- 1.2 Retriveing Specific Columns - You have a table or view. You wish to retrive data from specifc columns
+select BusinessEntityID,JobTitle , HireDate
+from HumanResources.Employee
+
+-- 1.3 Retriving all columns - You wish to retriving to all columns from a table or views
+select * 
+from HumanResources.Employee
+
+--1.4 Specifying the rows to be returned - Returns only those rows of interest.
+select *
+from Person.Person
+where Title = 'Mr.'
+
+--- 1.5 Renaming the output columns - You don't like the column names returned by a query.
+-- I wish the change the column names for clearity in reporting , or to be compartible 
+
+select BusinessEntityID as "EmployeeID", VacationHours as "Vacation" , SickLeaveHours as "Sick Time"
+from HumanResources.Employee
+
+--1.6 Building a columns from an expression - You wish to bind two columns and make one column
+select BusinessEntityID as EmployeeID,
+VacationHours + SickLeaveHours  as AvailableTimeOff
+from HumanResources.Employee
+
+-- 1.7  Providing shorter names for tables - You wish to privide a name for table or alias
+select t.BusinessEntityID as EmployeeID,
+t.VacationHours + t.SickLeaveHours as AvailabeTimeOff,
+t.HireDate as HireDate
+from HumanResources.Employee t
+
+-- 1.8 Negating a search condition - You wish to put a condition
+select pp.BusinessEntityID,
+FirstName + ''+MiddleName + '' + LastName as FullName
+from person.Person pp
+where Title in ('Mr.','Mrs.')
+
+--1.9 Specifying a range of values - You wish to specify a range of values restrict
+select BusinessEntityID as ID, ISNULL(FirstName +' '+MiddleName + ' '+LastName,'') as FullName
+from Person.Person
+where ModifiedDate between CONVERT(datetime,'2008-12-01') and CONVERT(datetime,'2008-12-20')
+
+--1.10 Checking for null values - You wish to find rows havig or not having null values.
+select ProductID,Name, Weight
+from Production.Product
+where Weight is null
+
+--1.11 Providing a list of values - you wish to list of those values based on list
+select *
+from Production.Product
+where Color in ('yellow','pink')
+
+-- 1.12 Performing Wildcard searches - You wish to find all matches values.
+select *
+from Production.Product
+where Name like 'B%'
+
+--1.13 Sorting Your Results - you wish the result the come back a query specif order.
+select top 2* from Production.Product
+select top 2* from Production.ProductListPriceHistory
+
+select pp.Name, pplh.EndDate
+from Production.Product pp
+inner join Production.ProductListPriceHistory pplh
+on pplh.ProductID = pp.ProductID
+order by pp.Name, pplh.EndDate
+
+-- 1.4 Specifying Sort Order - You want to one more colum descending order
+select top 2* from Production.Product
+select top 2* from Production.ProductListPriceHistory
+
+select plph.ProductID, pp.Name, plph.EndDate
+from Production.Product pp
+inner join Production.ProductListPriceHistory plph
+on plph.ProductID= pp.ProductID
+where plph.EndDate is not null
+order by plph.ProductID , pp.Name
+
+
+-- 1.5 Sorting by Column not selected - not return by the query.
+select pp.Name
+from Production.Product pp
+order by pp.Color
+
+
+-- 1.6 Forcing Unusual Sort Orders - wish to force the color red to sort first.
+select pp.ProductID, pp.Name, pp.Color
+from Production.Product pp
+where pp.Color is not null
+order by case  pp.Color
+	when 'red' then null
+	else pp.Color
+	end;
+
+-- 1.16.1 Forcing Unusual Sort Orders - wish to force the coor red to sort first.
+select pp.BusinessEntityID as ID, pp.Title
+from Person.Person pp
+where pp.title is not null
+order by case pp.Title
+	when 'Mr.' then 'for marrid'
+	when 'Miss.' then 'for unmarrid'
+	else pp.Title
+	end;
+	
+
+-- 1.17 Paging through a result set
+select ProductID, Name
+from Production.Product
+order by Name
+offset 0 rows fetch next 10 rows only;
+
+
+
