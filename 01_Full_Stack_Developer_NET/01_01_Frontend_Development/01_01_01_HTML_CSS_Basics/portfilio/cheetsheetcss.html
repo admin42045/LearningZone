@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Cheat Sheet - Clean & Simple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            padding: 20px;
+            font-size: 11px;
+            color: #333;
+            background: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+        
+        h2 {
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            color: #000;
+            background: #f0f0f0;
+            padding: 5px 10px;
+        }
+        
+        h3 {
+            font-size: 12px;
+            margin: 15px 0 5px 0;
+            font-weight: bold;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .code {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            margin: 5px 0;
+            white-space: pre-wrap;
+        }
+        
+        .inline {
+            background: #f0f0f0;
+            padding: 1px 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #ccc;
+            padding: 4px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f0f0f0;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        
+        @media print {
+            body { font-size: 9px; }
+            .code { font-size: 8px; }
+            table { font-size: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a style="color: red; font-size: 1rem;" href="./index.html">Back To Home!!!</a>
+        <h1>CSS Cheat Sheet</h1>
+        
+        <div class="section">
+            <h2>CSS Structure</h2>
+            <div class="code">selector {
+  property: value;
+  property: value;
+}
+
+/* Comment */</div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Selectors</h2>
+                <div class="code">element        /* h1 */
+.class         /* .container */
+#id            /* #header */
+*              /* all elements */
+element.class  /* div.box */
+element, element /* h1, h2 */
+element element  /* div p */
+element > element /* div > p */
+element + element /* h1 + p */
+element:hover     /* hover state */
+element::before   /* pseudo-element */</div>
+            </div>
+
+            <div class="section">
+                <h2>Text & Fonts</h2>
+                <div class="code">color: red;
+font-family: Arial, sans-serif;
+font-size: 16px;
+font-weight: bold;
+font-style: italic;
+text-align: center;
+text-decoration: underline;
+text-transform: uppercase;
+line-height: 1.5;
+letter-spacing: 2px;
+word-spacing: 5px;</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Colors</h2>
+                <div class="code">color: red;
+color: #ff0000;
+color: rgb(255, 0, 0);
+color: rgba(255, 0, 0, 0.5);
+color: hsl(0, 100%, 50%);
+color: hsla(0, 100%, 50%, 0.5);
+
+background-color: blue;
+background: #333;</div>
+            </div>
+
+            <div class="section">
+                <h2>Box Model</h2>
+                <div class="code">width: 100px;
+height: 50px;
+padding: 10px;
+margin: 20px;
+border: 1px solid black;
+
+padding: 10px 20px;     /* top/bottom left/right */
+padding: 10px 15px 20px 25px; /* top right bottom left */
+margin: auto;           /* center */</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Display & Position</h2>
+            <table>
+                <tr>
+                    <td><span class="inline">display: block</span></td>
+                    <td><span class="inline">display: inline</span></td>
+                    <td><span class="inline">display: inline-block</span></td>
+                    <td><span class="inline">display: none</span></td>
+                </tr>
+                <tr>
+                    <td><span class="inline">position: static</span></td>
+                    <td><span class="inline">position: relative</span></td>
+                    <td><span class="inline">position: absolute</span></td>
+                    <td><span class="inline">position: fixed</span></td>
+                </tr>
+            </table>
+            <div class="code">top: 10px;
+right: 20px;
+bottom: 30px;
+left: 40px;
+z-index: 999;</div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Flexbox</h2>
+                <div class="code">display: flex;
+flex-direction: row;    /* column */
+justify-content: center; /* flex-start, flex-end, space-between */
+align-items: center;    /* flex-start, flex-end, stretch */
+flex-wrap: wrap;
+gap: 10px;
+
+/* Flex items */
+flex: 1;
+flex-grow: 1;
+flex-shrink: 0;
+flex-basis: 200px;</div>
+            </div>
+
+            <div class="section">
+                <h2>Grid</h2>
+                <div class="code">display: grid;
+grid-template-columns: 1fr 2fr 1fr;
+grid-template-rows: 100px auto;
+grid-gap: 20px;
+grid-column: 1 / 3;
+grid-row: 1 / 2;
+
+/* Grid areas */
+grid-template-areas:
+  "header header"
+  "sidebar main"
+  "footer footer";</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Border & Border-radius</h2>
+            <table>
+                <tr>
+                    <td><span class="inline">border: 1px solid black</span></td>
+                    <td><span class="inline">border-top: 2px dashed red</span></td>
+                    <td><span class="inline">border-radius: 10px</span></td>
+                </tr>
+                <tr>
+                    <td><span class="inline">border-width: 1px</span></td>
+                    <td><span class="inline">border-style: solid</span></td>
+                    <td><span class="inline">border-color: blue</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Background</h2>
+                <div class="code">background-color: #333;
+background-image: url('image.jpg');
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+background-attachment: fixed;
+
+/* Shorthand */
+background: #333 url('img.jpg') no-repeat center;</div>
+            </div>
+
+            <div class="section">
+                <h2>Shadow & Effects</h2>
+                <div class="code">box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+text-shadow: 1px 1px 2px #000;
+opacity: 0.5;
+visibility: hidden;
+overflow: hidden;  /* visible, scroll, auto */
+cursor: pointer;</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Transform & Animation</h2>
+            <div class="grid">
+                <div class="code">transform: translate(50px, 100px);
+transform: rotate(45deg);
+transform: scale(1.5);
+transform: skew(20deg, 10deg);
+
+transition: all 0.3s ease;</div>
+                <div class="code">@keyframes slide {
+  from { left: 0; }
+  to { left: 100px; }
+}
+
+animation: slide 2s infinite;</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Responsive Design</h2>
+            <div class="code">/* Media queries */
+@media (max-width: 768px) {
+  .container { width: 100%; }
+}
+
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}</div>
+        </div>
+
+        <div class="section">
+            <h2>Common Units</h2>
+            <table>
+                <tr>
+                    <td><span class="inline">px</span></td><td>Pixels (absolute)</td>
+                    <td><span class="inline">%</span></td><td>Percentage of parent</td>
+                </tr>
+                <tr>
+                    <td><span class="inline">em</span></td><td>Relative to font size</td>
+                    <td><span class="inline">rem</span></td><td>Relative to root font</td>
+                </tr>
+                <tr>
+                    <td><span class="inline">vh</span></td><td>Viewport height</td>
+                    <td><span class="inline">vw</span></td><td>Viewport width</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Pseudo-classes</h2>
+                <div class="code">:hover
+:focus
+:active
+:visited
+:first-child
+:last-child
+:nth-child(2)
+:nth-child(odd)
+:nth-child(even)</div>
+            </div>
+
+            <div class="section">
+                <h2>Pseudo-elements</h2>
+                <div class="code">::before
+::after
+::first-line
+::first-letter
+
+/* Example */
+.box::before {
+  content: "";
+  display: block;
+}</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>CSS Reset/Normalize</h2>
+            <div class="code">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}</div>
+        </div>
+
+        <div class="section">
+            <h2>Useful Properties</h2>
+            <table>
+                <tr>
+                    <td><span class="inline">list-style: none</span></td>
+                    <td>Remove list bullets</td>
+                    <td><span class="inline">text-decoration: none</span></td>
+                    <td>Remove link underline</td>
+                </tr>
+                <tr>
+                    <td><span class="inline">outline: none</span></td>
+                    <td>Remove focus outline</td>
+                    <td><span class="inline">resize: none</span></td>
+                    <td>Disable textarea resize</td>
+                </tr>
+                <tr>
+                    <td><span class="inline">user-select: none</span></td>
+                    <td>Disable text selection</td>
+                    <td><span class="inline">pointer-events: none</span></td>
+                    <td>Disable all interactions</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

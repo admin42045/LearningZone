@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Cheat Sheet - Clean & Simple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            padding: 20px;
+            font-size: 11px;
+            color: #333;
+            background: white;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+        
+        h2 {
+            font-size: 16px;
+            margin: 20px 0 10px 0;
+            color: #000;
+            background: #f0f0f0;
+            padding: 5px 10px;
+        }
+        
+        h3 {
+            font-size: 12px;
+            margin: 15px 0 5px 0;
+            font-weight: bold;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .code {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            margin: 5px 0;
+            white-space: pre-wrap;
+        }
+        
+        .inline {
+            background: #f0f0f0;
+            padding: 1px 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 10px;
+        }
+        
+        th, td {
+            border: 1px solid #ccc;
+            padding: 4px;
+            text-align: left;
+        }
+        
+        th {
+            background: #f0f0f0;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+            page-break-inside: avoid;
+        }
+        
+        @media print {
+            body { font-size: 9px; }
+            .code { font-size: 8px; }
+            table { font-size: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a style="color: red; font-size: 1rem;" href="./index.html">Back To Home!!!</a>
+        <h1>HTML Cheat Sheet</h1>
+        
+        <div class="section">
+            <h2>Document Structure</h2>
+            <div class="code">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  Content here
+&lt;/body&gt;
+&lt;/html&gt;</div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Text</h2>
+                <div class="code">&lt;h1&gt;Heading 1&lt;/h1&gt;
+&lt;h2&gt;Heading 2&lt;/h2&gt;
+&lt;h3&gt;Heading 3&lt;/h3&gt;
+&lt;p&gt;Paragraph&lt;/p&gt;
+&lt;br&gt; Line break
+&lt;hr&gt; Horizontal line
+&lt;strong&gt;Bold&lt;/strong&gt;
+&lt;em&gt;Italic&lt;/em&gt;
+&lt;u&gt;Underline&lt;/u&gt;
+&lt;mark&gt;Highlight&lt;/mark&gt;
+&lt;code&gt;Code&lt;/code&gt;</div>
+            </div>
+
+            <div class="section">
+                <h2>Lists</h2>
+                <div class="code">&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ol&gt;</div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Links & Media</h2>
+                <div class="code">&lt;a href="url"&gt;Link&lt;/a&gt;
+&lt;a href="mailto:email"&gt;Email&lt;/a&gt;
+&lt;a href="tel:phone"&gt;Phone&lt;/a&gt;
+&lt;a href="#" target="_blank"&gt;New tab&lt;/a&gt;
+
+&lt;img src="image.jpg" alt="text"&gt;</div>
+            </div>
+
+            <div class="section">
+                <h2>Form Basics</h2>
+                <div class="code">&lt;form action="/submit" method="post"&gt;
+  &lt;label for="name"&gt;Name:&lt;/label&gt;
+  &lt;input type="text" id="name" name="name"&gt;
+  
+  &lt;textarea name="message"&gt;&lt;/textarea&gt;
+  
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Input Types</h2>
+            <table>
+                <tr>
+                    <td><span class="inline">&lt;input type="text"&gt;</span></td>
+                    <td><span class="inline">&lt;input type="email"&gt;</span></td>
+                    <td><span class="inline">&lt;input type="password"&gt;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="inline">&lt;input type="number"&gt;</span></td>
+                    <td><span class="inline">&lt;input type="date"&gt;</span></td>
+                    <td><span class="inline">&lt;input type="file"&gt;</span></td>
+                </tr>
+                <tr>
+                    <td><span class="inline">&lt;input type="checkbox"&gt;</span></td>
+                    <td><span class="inline">&lt;input type="radio"&gt;</span></td>
+                    <td><span class="inline">&lt;input type="hidden"&gt;</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="grid">
+            <div class="section">
+                <h2>Table</h2>
+                <div class="code">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Header&lt;/th&gt;
+    &lt;th&gt;Header&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Data&lt;/td&gt;
+    &lt;td&gt;Data&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+            </div>
+
+            <div class="section">
+                <h2>Semantic Elements</h2>
+                <div class="code">&lt;header&gt;&lt;/header&gt;
+&lt;nav&gt;&lt;/nav&gt;
+&lt;main&gt;&lt;/main&gt;
+&lt;article&gt;&lt;/article&gt;
+&lt;section&gt;&lt;/section&gt;
+&lt;aside&gt;&lt;/aside&gt;
+&lt;footer&gt;&lt;/footer&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;span&gt;&lt;/span&gt;</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Common Attributes</h2>
+            <table>
+                <tr>
+                    <td><span class="inline">id="unique"</span></td>
+                    <td>Unique identifier</td>
+                    <td><span class="inline">class="style"</span></td>
+                    <td>CSS class</td>
+                </tr>
+                <tr>
+                    <td><span class="inline">style="css"</span></td>
+                    <td>Inline CSS</td>
+                    <td><span class="inline">title="tooltip"</span></td>
+                    <td>Hover text</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Special Characters</h2>
+            <table>
+                <tr>
+                    <td>&lt;</td><td><span class="inline">&amp;lt;</span></td>
+                    <td>&gt;</td><td><span class="inline">&amp;gt;</span></td>
+                    <td>&amp;</td><td><span class="inline">&amp;amp;</span></td>
+                    <td>"</td><td><span class="inline">&amp;quot;</span></td>
+                </tr>
+                <tr>
+                    <td>©</td><td><span class="inline">&amp;copy;</span></td>
+                    <td>®</td><td><span class="inline">&amp;reg;</span></td>
+                    <td>™</td><td><span class="inline">&amp;trade;</span></td>
+                    <td>&nbsp;</td><td><span class="inline">&amp;nbsp;</span></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Comments & Meta</h2>
+            <div class="code">&lt;!-- Comment --&gt;
+
+&lt;meta name="description" content="Page description"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;
+&lt;script src="script.js"&gt;&lt;/script&gt;</div>
+        </div>
+    </div>
+</body>
+</html>
