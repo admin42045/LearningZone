@@ -1,0 +1,163 @@
+use AdventureWorks2022
+go
+
+/*
+ISNULL -> isnull validates whethere an expression is null and if so, replaces the null value with an alternative value.
+COALESCE -> The coalesce funtion returns the first non-null value from a provided list of expression.
+NULLIF -> nullif returns a null value when the two provided expression have the same values. otherwise, the first expression is returned.
+*/
+
+
+
+--3.1 Replacing null with an alternative value
+
+select h.SalesOrderID, h.CreditCardApprovalCode, CreditApprovalCode_Display = ISNULL(h.CreditCardApprovalCode,'**NO APPROVAL**')
+from Sales.SalesOrderHeader h
+
+
+
+
+--3.2 Returning the first Non-NULL Value from a list
+select top 1 * from Sales.Customer c
+select top 1 * from Sales.Store s
+select top 1 * from Person.PersonPhone pp
+
+
+
+select c.CustomerID, SalesPersonPhone = spp.PhoneNumber ,
+CustomerPhone = pp.PhoneNumber,
+PhoneNumber = COALESCE(pp.PhoneNumber, spp.PhoneNumber, '** No Phone **')
+from Sales.Customer c
+left outer join Sales.Store s
+on c.StoreID = s.BusinessEntityID
+left outer join Person.PersonPhone spp
+on s.SalesPersonID = spp.BusinessEntityID
+left outer join Person.PersonPhone pp
+on c.CustomerID = pp.BusinessEntityID
+order by c.CustomerID
+
+
+--3.3 Choosing Between isnull and coalesce in a select statement
+Declare @sql nvarchar(max) = '
+ SELECT ISNULL(''5'',5),
+ isnull(5,''5''),
+ coalesce(''5'',5),
+ coalesce(5,''5'');
+';
+
+exec sp_executesql @sql;
+
+select *
+from master.sys.dm_exec_describe_first_result_set(@sql,null,0)a;
+
+
+
+-- 3.4 Looking for nulls in a table
+
+declare @value int = null;
+select  case 
+when @value = null then 1
+when @value <> null then 2
+when @value is null then 3
+else 4
+end;
+
+
+--3.5 Removing values from an aggregate
+select r.ProductID, r.OperationSequence, 
+StartDateVariance = AVG(DATEDIFF(day,ScheduledStartDate, ActualStartDate)),
+StartDateVariance_Adjusted = AVG(NULLIF(DATEDIFF(day, ScheduledStartDate, ActualStartDate),0))
+from Production.WorkOrderRouting r
+group by r.ProductID, r.OperationSequence
+order by r.ProductID, r.OperationSequence;
+
+
+ -- 3.6 Enforcing uniqueness with null values
+ CREATE TABLE Product1
+ (
+ ProductID int not null
+ constraint pk_product1 primary key clustered,
+ ProductName nvarchar(50) not null,
+ CodeName nvarchar(50)
+ );
+
+go
+--create a unique nonclustered index on codename
+Create Unique Index Ux_Product1_CodeName on Product1 (CodeName);
+go
+
+--test the unique index by adding some rows to the table.
+Insert into Product1
+(ProductID, ProductName, CodeName)
+values(1,'Product 1', 'Shiloh'),
+(2,'Product 2','Sphynx'),
+(3, 'Product 3', null),
+(4, 'Product 4',NULL);
+
+
+
+select * from Product1
+
+-- 3.7 Enforcing Referential Integrity on Nullable Columns
+CREATE TABLE Category
+(
+CategoryId int not null
+Constraint PK_Category primary key clustered,
+CategoryName nvarchar(50) not null
+);
+
+
+INSERT INTO Category
+(CategoryId,CategoryName)
+values(1,'Category 1'),
+(2,'Category 2'),
+(3, 'Category 3');
+
+
+-- 3.8 Joining Tables on NUllable Columns
+create table test1
+(
+TestValue nvarchar(10) null
+);
+
+create table test2
+(
+TestValue nvarchar(10) null
+);
+go
+
+
+insert into test1
+values('apples'),
+('oranges'),
+(null),
+(null);
+
+
+insert into test2
+values('null'),
+('oranges'),
+('grapes'),
+(null);
+
+
+select * from test1
+select * from test2 
+
+select t1.TestValue, t2.TestValue
+from test1 t1
+inner join test2 t2
+on t1.TestValue = t2.TestValue
+
+
+
+
+
+
+
+
+
+
+
+
+
