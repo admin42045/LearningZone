@@ -1,0 +1,154 @@
+use AdventureWorks2022
+go
+
+
+--2.1 Declaring Variables
+Declare @AddressLine1 nvarchar(50) = 'Heiderplatz';
+
+select *
+from  Person.Address
+where AddressLine1 like '%' + @AddressLine1 + '%'
+
+-- 2.2 Terieving a value into a variable
+Declare @addressline11 nvarchar(50);
+Declare @addressline22 nvarchar(50);
+
+select @addressline11 = AddressLine1 , @addressline22 = AddressLine2 
+from Person.Address
+where AddressID = 66
+
+select @addressline11 as Address1, @addressline22 as Address2
+
+
+
+
+--2.3 Writing IF, ELSE statement
+Declare @QuerySelector int = 3;
+if @QuerySelector = 1
+begin
+ select top 3 Productid, name, color  from Production.Product
+ where color = 'silver'
+end
+else
+begin
+select top 3 ProductID, Name, Color from Production.Product where Color = 'black'
+end;
+
+
+
+-- 2.4 Writing a simple case statement
+
+select DepartmentID as DeptID, Name, GroupName,
+case groupname
+	when 'Research and Development' then 'Room A'
+	when 'Sales and Marketing' then 'Room B'
+	when 'Inventory Management' then 'Room C'
+	when 'Manufacturing' then 'Room D'
+	when 'Executive General and Administration' then 'Room E'
+	when 'Quality Assurance' then 'Room F'
+	when 'Angular Developer' then 'Frontend Developer'
+	when 'React.JS Developer' then 'Frontend Developer'
+	when 'Fontend And Backend' then 'Full Stack Developer'
+	else 'anonmouse room'
+	end as ConfRoom
+from HumanResources.Department;
+
+-- 2.5 Writing a Searched case expression
+
+select DepartmentID as DeptID, Name , GroupName,
+case 
+ when Name ='Research and Development' then 'Room A'
+ when (Name = 'Sales and Marketing' Or DepartmentID = 10) then 'Room B'
+ else 'Room anomouse'
+ end as ConferenceRoom
+from HumanResources.Department
+
+--2.6 Writing a while statement
+
+--declare varialbes
+Declare @AWTables Table (SchemaTable varchar(100));
+Declare @TableName varchar(100);
+
+--insert table into the table variable
+Insert @AWTables (SchemaTable)
+select table_schema + '.' + Table_Name
+from INFORMATION_SCHEMA.TABLES
+where TABLE_TYPE = 'BASE TAble'
+order by TABLE_SCHEMA + '.' + TABLE_NAME
+
+
+-- report on each table using sp_spaceued
+while(select count(*) from @AWTables) > 0
+	BEGIN
+	 select top 1 @TableName = SchemaTable
+	 from @AWTables
+	 order by SchemaTable;
+	  exec sp_spaceused @TableName
+	  Delete @AWTables
+	  where SchemaTable = @TableName
+	END;
+
+
+
+-- 2.7 Returning from the current execution scope
+-- solution #1: Exit with no return value
+
+if not exists
+(select ProductID
+from Production.Product
+where Color = 'black')
+begin
+   return;
+end;
+
+select ProductID
+from Production.Product
+where Color = 'black';
+
+-- solution #2: Exit and provide a value
+
+CREATE PROCEDURE ReportPink 
+
+IF NOT EXISTS
+ (SELECT ProductID
+ FROM Production.Product
+ WHERE Color = 'Pink')
+BEGIN
+ --Return the value 100 to indicate no pink products
+ RETURN 100;
+END;
+SELECT ProductID
+FROM Production.Product
+WHERE Color = 'Pink';
+--Return the value 0 to indicate pink was found
+RETURN 0;
+--With this procedure in place, execute the following:
+DECLARE @ResultStatus int;
+EXEC @ResultStatus = ReportPink;
+PRINT @ResultStatus;
+
+
+-- 2.8 Going to a label in a Transact sql batch
+Declare @Name nvarchar(50) = 'Engineering';
+Declare @GroupName nvarchar(50) = 'Rearch and Developmnet';
+Declare @Exists bit = 0;
+
+IF EXISTS ( 
+	SELECT NAME 
+	FROM HumanResources.Department
+	WHERE NAME = @Name)
+BEGIN
+	SET @Exists = 1;
+	GOTO SkipInsert;
+END;
+
+INSERT INTO HumanResources.Department
+(Name,GroupName)
+VALUES(@Name, @GroupName);
+
+SkipInsert: IF @Exists = 1
+
+BEGIN 
+	PRINT @Name + ' already exists in HumanResources.Department'; 
+END;
+
