@@ -1,3 +1,4 @@
+using _00_Basic.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,8 @@ namespace _00_Basic
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // Register the employee service dependency injection
+            services.AddSingleton<IEmployeeRepository,EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
