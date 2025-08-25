@@ -9,6 +9,7 @@ out/
 *.suo
 *.userosscache
 *.sln.docstates
+*LearnZone.sln
 
 ## ASP.NET
 appsettings.*.json
